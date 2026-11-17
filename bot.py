@@ -60,6 +60,9 @@ def todays_message(today=None):
 def show_chats(token):
     """Bot qaysi guruhlarni ko'rganini chiqaradi (CHAT_ID'ni aniqlash uchun)."""
     try:
+        with urllib.request.urlopen(f"https://api.telegram.org/bot{token}/getMe", timeout=30) as r:
+            me = json.load(r).get("result", {})
+        print("Token qaysi botniki:", "@" + str(me.get("username")))
         url = f"https://api.telegram.org/bot{token}/getUpdates"
         with urllib.request.urlopen(url, timeout=30) as r:
             res = json.load(r)
@@ -92,6 +95,7 @@ def send(token, chat_id, text):
     if not res.get("ok"):
         raise SystemExit(f"Telegram xatosi: {res}")
     print("Yuborildi ✅")
+
 
 if __name__ == "__main__":
     msg = todays_message()
