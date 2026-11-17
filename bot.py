@@ -13,6 +13,7 @@ import html
 import json
 import os
 import sys
+import urllib.error
 import urllib.parse
 import urllib.request
 
@@ -56,6 +57,23 @@ def todays_message(today=None):
     )
 
 
+def show_chats(token):
+    """Bot qaysi guruhlarni ko'rganini chiqaradi (CHAT_ID'ni aniqlash uchun)."""
+    try:
+        url = f"https://api.telegram.org/bot{token}/getUpdates"
+        with urllib.request.urlopen(url, timeout=30) as r:
+            res = json.load(r)
+        seen = {}
+        for u in res.get("result", []):
+            for k in ("message", "my_chat_member", "chat_member", "edited_message"):
+                c = (u.get(k) or {}).get("chat")
+                if c:
+                    seen[c["id"]] = c.get("title") or c.get("username")
+        print("Bot ko'rgan chatlar (CHAT_ID: nomi):", seen)
+    except Exception as e:  # faqat yordamchi ma'lumot
+        print("Chatlar ro'yxatini olib bo'lmadi:", e)
+
+
 def send(token, chat_id, text):
     url = f"https://api.telegram.org/bot{token}/sendMessage"
     data = urllib.parse.urlencode({
@@ -64,12 +82,16 @@ def send(token, chat_id, text):
         "parse_mode": "HTML",
         "disable_web_page_preview": "true",
     }).encode()
-    with urllib.request.urlopen(urllib.request.Request(url, data=data), timeout=30) as r:
-        res = json.load(r)
+    try:
+        with urllib.request.urlopen(urllib.request.Request(url, data=data), timeout=30) as r:
+            res = json.load(r)
+    except urllib.error.HTTPError as e:
+        print("Telegram javobi:", e.read().decode(errors="replace"))
+        show_chats(token)
+        raise SystemExit(1)
     if not res.get("ok"):
         raise SystemExit(f"Telegram xatosi: {res}")
     print("Yuborildi ✅")
-
 
 if __name__ == "__main__":
     msg = todays_message()
