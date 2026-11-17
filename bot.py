@@ -76,7 +76,9 @@ if __name__ == "__main__":
     if "--dry-run" in sys.argv:
         print(msg)
         sys.exit()
-    token, chat_id = os.environ.get("BOT_TOKEN"), os.environ.get("CHAT_ID")
+    # Nusxalashda tasodifan qo'shilgan bo'sh joy va qator ko'chishlarini olib tashlaymiz
+    token = "".join((os.environ.get("BOT_TOKEN") or "").split())
+    chat_id = "".join((os.environ.get("CHAT_ID") or "").split())
     if not token or not chat_id:
         raise SystemExit("BOT_TOKEN va CHAT_ID o'rnatilmagan.")
     send(token, chat_id, msg)
