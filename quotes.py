@@ -10,6 +10,12 @@ QUOTES = [
     ("Yaxshi xotin - uyning davlati va baxti; uyning orastaligi, erning ko'ngli osudaligi undandir.",
      "Alisher Navoiy", "«Mahbub ul-qulub»", True),
     # --- Shayx Muhammad Sodiq Muhammad Yusuf, «Baxtiyor oila» ---
+    ("Oila va uning baxti, saodati haqida soʻz yuritishdan oldin insonning yaratilishidan koʻzlangan maqsadlarga nazar solish, ayniqsa, nima uchun inson erkak va ayol qilib, juft qilib yaratildi, degan savolga javob axtarish lozim boʻladi.",
+     "Shayx Muhammad Sodiq Muhammad Yusuf", "«Baxtiyor oila»", False),
+    ("“Alloh sizlarni tuproqdan, soʻngra nutfadan yaratib, keyin juft-juft qilib qoʻydi” (Fotir surasi, 11-oyat). Tuproqqa jon kirgizib, odam qilgan Zot – Alloh. Nutfaga jon ato qilgan Zot – Alloh. Insonni juft – erkak va ayol qilib yaratgan Zot – Alloh. Erkakka erkaklik va ayolga ayollik xususiyatlarini bergan Zot – Alloh.",
+     "Shayx Muhammad Sodiq Muhammad Yusuf", "«Baxtiyor oila»", False),
+    ("“Va Uning oyat-belgilaridan sizlarga sokinlik topishingiz uchun oʻzingizdan juftlar yaratganligi va oralaringizda mehr-u muhabbat va marhamatni solib qoʻyganidir. Albatta, bunda tafakkur qiladigan qavmlar uchun oyat-belgilar bordir” (Rum surasi, 21-oyat).",
+     "Shayx Muhammad Sodiq Muhammad Yusuf", "«Baxtiyor oila»", False),
     ("Alloh taolo insonning oʻzidan unga juft yaratib berishining hikmatini bayon qilib: “sokinlik topishingiz uchun”, demoqda. Darhaqiqat, erkak faqat ayolidangina sokinlik, orom, huzur-halovat, osoyishtalik va tinchlik topadi. Shuningdek, ayol ham oʻziga kerak sokinlik, orom, huzur-halovat, osoyishtalik va tinchlikni erkakdan topadi.",
      "Shayx Muhammad Sodiq Muhammad Yusuf", "«Baxtiyor oila»", False),
     ("Alloh taoloning Oʻzi er bilan xotinning orasiga sevgi, mehr-muhabbat, rahm-shafqat solmasa, ular bir-birlarining baʼzi kamchiliklarini, oilaviy qiyinchiliklarni koʻtara olarmidilar? Chidab birga yasharmidilar?",
