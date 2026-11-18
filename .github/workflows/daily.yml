@@ -2,9 +2,9 @@ name: Oila hikmati
 
 on:
   schedule:
-    # Har kuni Toshkent vaqti bilan 07:27 da (UTC 02:27).
+    # Har kuni Toshkent vaqti bilan 07:00, 12:00 va 19:00 da (UTC 02:00, 07:00, 14:00).
     # GitHub ba'zan bir necha daqiqa kechiktirishi mumkin.
-    - cron: "27 2 * * *"
+    - cron: "0 2,7,14 * * *"
   workflow_dispatch: {}   # "Run workflow" tugmasi bilan qo'lda sinash uchun
 
 jobs:
