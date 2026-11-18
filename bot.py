@@ -1,4 +1,4 @@
-"""Har kuni guruhga oila haqida buyuk mutafakkirlar iqtibosini yuboradigan Telegram bot.
+"""Kuniga 3 marta (07:00, 12:00, 19:00) guruhga oila haqida buyuk mutafakkirlar iqtibosini yuboradigan Telegram bot.
 
 Ishlatish:
     python bot.py            # bugungi iqtibosni guruhga yuboradi
@@ -40,11 +40,25 @@ def esc(s):
     return html.escape(s, quote=False)
 
 
-def todays_message(today=None):
-    today = today or datetime.datetime.now(TASHKENT).date()
+def current_slot(now=None):
+    """0 - ertalab (07:00), 1 - tush (12:00), 2 - kechqurun (19:00)."""
+    now = now or datetime.datetime.now(TASHKENT)
+    if now.hour < 10:
+        return 0
+    if now.hour < 16:
+        return 1
+    return 2
+
+
+def todays_message(today=None, slot=None):
+    now = datetime.datetime.now(TASHKENT)
+    today = today or now.date()
+    slot = current_slot(now) if slot is None else slot
     day = (today - START).days
-    text, author, source, mazmunan = QUOTES[day % len(QUOTES)]
-    num = day % len(QUOTES) + 1
+    # Kuniga 3 ta iqtibos. 18-noyabr ertalab 1-iqtibos chiqqan, kechqurun 2-iqtibos.
+    idx = (day * 3 + slot - 1) % len(QUOTES)
+    text, author, source, mazmunan = QUOTES[idx]
+    num = idx + 1
     sana = f"{today.day}-{OYLAR[today.month - 1]}, {KUNLAR[today.weekday()]}"
     note = " (mazmunan)" if mazmunan else ""
     return (
@@ -52,7 +66,7 @@ def todays_message(today=None):
         f"<i>«{esc(text)}»</i>\n\n"
         f"— <b>{esc(author)}</b>\n"
         f"📖 {esc(source)}{note}\n\n"
-        f"{YAKUN[day % len(YAKUN)]}\n"
+        f"{YAKUN[idx % len(YAKUN)]}\n"
         f"<code>#{num}/{len(QUOTES)}</code>"
     )
 
